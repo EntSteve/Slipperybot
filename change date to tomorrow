@@ -1,0 +1,98 @@
+    string date;
+                    date = DateTime.Today.ToString();
+                    int pass = 0, dayint, monthint, yearint;
+                    string month = "", day = "", year = "";
+                    //String example 03/21/2017 12:00:00 AM
+                    foreach (char x in date)
+                    {//Goes till month is read in
+                        if (pass == 0)
+                        {
+                            if (x != '/')
+                            {
+                                month += @x;
+                            }
+                            else
+                            {
+                                pass++;
+                            }
+                        } //Goes till day is read in
+                        else if (pass == 1)
+                        {
+                            if (x != '/')
+                            {
+                                day += @x;
+                            }
+                            else
+                            {
+                                pass++;
+                            }
+                        } //Goes till year is read in
+                        else if (pass == 2)
+                        {
+                            if (x != ' ')
+                            {
+                                year += @x;
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+                    }
+
+                    //Convert date strings to ints
+                    dayint =  int.Parse(day);
+                    monthint = int.Parse(month);
+                    yearint = int.Parse(year);
+
+                    //increase the date to the next day
+                    dayint++;
+                    //Check for month change
+                    if (monthint == 1 || monthint == 3 || monthint == 5 || monthint == 7 || monthint == 8 || monthint == 10 || monthint == 12)
+                    {
+                        if (dayint > 31)
+                        {
+                            monthint++;
+                            //check year
+                            if (monthint > 12)
+                            {
+                                yearint++;
+                            }
+                        }
+                    }
+                    else if (monthint == 2 || monthint == 4 || monthint == 6 || monthint == 9 || monthint == 11)
+                    {
+                        if (dayint > 30)
+                        {
+                            monthint++;
+                            //check year
+                            if (monthint > 12)
+                            {
+                                yearint++;
+                            }
+                        }
+                    }
+                    else if (!DateTime.IsLeapYear(yearint))
+                    {
+                        if (dayint > 28)
+                        {
+                            monthint++;
+                            //check year
+                            if (monthint > 12)
+                            {
+                                yearint++;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (dayint > 29)
+                        {
+                            monthint++;
+                            //check year
+                            if (monthint > 12)
+                            {
+                                yearint++;
+                            }
+                        }
+                    }
